@@ -67,13 +67,18 @@ Vagrant.configure("2") do |config|
       puts 'vagrant plugin install vagrant-triggers'
     end
     
-    # import - create trigger*
+    # TODO: import - create trigger*
     # mysql -u root -p < alldb.sql
     # run "vagrant ssh -c 'mysql -u root scotchbox < mysqldump_DATE'"
 
     # Extra provisions:
     config.vm.provision "shell", inline: <<-SHELL, privileged: true
     
+      # Change /public to /public_html
+      mv /var/www/public /var/www/public_html
+      sudo sed -i s,/var/www/public,/var/www/public_html,g /etc/apache2/sites-available/000-default.conf
+      sudo sed -i s,/var/www/public,/var/www/public_html,g /etc/apache2/sites-available/scotchbox.local.conf
+      sudo service apache2 restart
 
       # TODO: Install Mailcatcher
 
