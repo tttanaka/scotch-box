@@ -11,6 +11,10 @@ Vagrant.configure("2") do |config|
     config.vm.hostname = "scotchbox" # rename to example.dev (example = client domain name)
     config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=666"]
     
+    # Weird SSH issues can occur - workaround:
+    #config.ssh.username = "vagrant"
+    #config.ssh.password = "vagrant"
+    
     # Optional NFS. Make sure to remove other synced_folder line too
     #config.vm.synced_folder ".", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=666"] }
     
