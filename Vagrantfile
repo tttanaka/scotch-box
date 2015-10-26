@@ -28,6 +28,10 @@ Vagrant.configure("2") do |config|
     end
     
     # Vagrant Triggers
+    # 
+    # Database backups
+    # TODO: switch to mysql -u root -proot scotchbox < /var/www/dump.sql
+    # 
     # Backup MySQL database on halt: :destroy
     if Vagrant.has_plugin? 'vagrant-triggers'
       config.trigger.before :halt, :stdout => true do
@@ -69,6 +73,7 @@ Vagrant.configure("2") do |config|
 
     # Extra provisions:
     config.vm.provision "shell", inline: <<-SHELL, privileged: true
+    
 
       # TODO: Install Mailcatcher
 
